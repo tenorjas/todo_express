@@ -3,6 +3,18 @@ const mustacheExpress = require("mustache-express");
 const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
 
+// make sample todo list
+const todos = [
+  "wash the car",
+  "do the laundry",
+  "make the bed",
+  "mow the lawn",
+  "drive the kids to school",
+  "play with the niece and nephew",
+  "feed the cat",
+  "water the garden"
+];
+
 const app = express();
 
 app.use(express.static("public"));
@@ -24,7 +36,7 @@ app.set("view engine", "mustache");
 
 // define a home page
 app.get("/", function(request, response) {
-  response.render("main");
+  response.render("main", { todos: todos });
 });
 
 app.listen(3000, function() {
