@@ -11,3 +11,25 @@ h1 {
   flex-direction: column;
   align-items: center;
 }
+
+.add_todo input {
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  background-color: white;
+  box-shadow: 20px;
+}
+
+.uncompleted li {
+  margin-bottom: 5px;
+}

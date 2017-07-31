@@ -4,49 +4,9 @@ const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
 const jsonfile = require("jsonfile");
 
-// make sample todo list
-const todoList = [
-  {
-    id: 1,
-    completed: false,
-    description: "wash the car"
-  },
-  {
-    id: 2,
-    completed: false,
-    description: "do the laundry"
-  },
-  {
-    id: 3,
-    completed: false,
-    description: "make the bed"
-  },
-  {
-    id: 4,
-    completed: false,
-    description: "mow the lawn"
-  },
-  {
-    id: 5,
-    completed: false,
-    description: "drive the kids to school"
-  },
-  {
-    id: 6,
-    completed: true,
-    description: "play with the niece and nephew"
-  },
-  {
-    id: 7,
-    completed: true,
-    description: "feed the cat"
-  },
-  {
-    id: 8,
-    completed: true,
-    description: "water the garden"
-  }
-];
+const file = "./todoList.json";
+
+const todoList = jsonfile.readFileSync(file);
 
 const app = express();
 

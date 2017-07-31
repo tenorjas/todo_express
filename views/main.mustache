@@ -10,11 +10,11 @@
 <body>
   <h1>To-do List</h1>
   <div class="wrapper">
-    <form class="" action="/addTodo" method="post">
+    <form class="add_todo" action="/addTodo" method="post">
       <input type="text" name="description" value="" placeholder="Add a todo">
       <button type="submit" name="button">Add todo</button>
     </form>
-    <ul>
+    <ul class="uncompleted">
       {{#uncompleted}}
         <li>
           <form class="" action="/markComplete" method="post">
@@ -25,7 +25,7 @@
     </ul>
 
     <h1>Completed Tasks</h1>
-    <ul>
+    <ul class="completed">
       {{#completed}}
         <li>{{description}}</li>
       {{/completed}}
