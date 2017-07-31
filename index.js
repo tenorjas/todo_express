@@ -2,9 +2,10 @@ const express = require("express");
 const mustacheExpress = require("mustache-express");
 const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
+const jsonfile = require("jsonfile");
 
 // make sample todo list
-const todos = [
+const todoList = [
   "wash the car",
   "do the laundry",
   "make the bed",
@@ -36,7 +37,7 @@ app.set("view engine", "mustache");
 
 // define a home page
 app.get("/", function(request, response) {
-  response.render("main", { todos: todos });
+  response.render("main", { todoList: todoList });
 });
 
 app.listen(3000, function() {
