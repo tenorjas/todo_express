@@ -6,14 +6,46 @@ const jsonfile = require("jsonfile");
 
 // make sample todo list
 const todoList = [
-  "wash the car",
-  "do the laundry",
-  "make the bed",
-  "mow the lawn",
-  "drive the kids to school",
-  "play with the niece and nephew",
-  "feed the cat",
-  "water the garden"
+  {
+    id: 1,
+    completed: false,
+    description: "wash the car"
+  },
+  {
+    id: 2,
+    completed: false,
+    description: "do the laundry"
+  },
+  {
+    id: 3,
+    completed: false,
+    description: "make the bed"
+  },
+  {
+    id: 4,
+    completed: false,
+    description: "mow the lawn"
+  },
+  {
+    id: 5,
+    completed: false,
+    description: "drive the kids to school"
+  },
+  {
+    id: 6,
+    completed: true,
+    description: "play with the niece and nephew"
+  },
+  {
+    id: 7,
+    completed: true,
+    description: "feed the cat"
+  },
+  {
+    id: 8,
+    completed: true,
+    description: "water the garden"
+  }
 ];
 
 const app = express();
@@ -37,7 +69,34 @@ app.set("view engine", "mustache");
 
 // define a home page
 app.get("/", function(request, response) {
-  response.render("main", { todoList: todoList });
+  const uncompleted = todoList.filter(todo => !todo.completed);
+  const completed = todoList.filter(todo => todo.completed);
+
+  response.render("main", { completed: completed, uncompleted: uncompleted });
+});
+
+app.post("/addTodo", function(request, response) {
+  // Now write the code to add a new todo to the list
+  const descriptionForNewTodo = request.body.description;
+  todoList.push({ id: todoList.length + 1, completed: false, description: descriptionForNewTodo });
+  response.redirect("/");
+});
+
+app.post("/markComplete", function(request, response) {
+  // convert the form's ID from a string to a number, so we can compare it later.
+  const id = parseInt(request.body.id);
+
+  // Find the todo in the todoList that has the same ID as the requested id
+  const foundTodo = todoList.find(todo => todo.id === id);
+
+  // If we found a todo
+  if (foundTodo) {
+    // Set that todo completed = true
+    foundTodo.completed = true;
+  }
+
+  // Send the user's browser back to the home page
+  response.redirect("/");
 });
 
 app.listen(3000, function() {
